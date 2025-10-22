@@ -1,4 +1,7 @@
-/* Base layout */
+/* -------------------------
+   Base Layout and Theme
+-------------------------- */
+
 body {
   font-family: system-ui, Segoe UI, Roboto, Arial, sans-serif;
   max-width: 900px;
@@ -10,39 +13,34 @@ body {
   transition: background-color 0.3s, color 0.3s;
 }
 
-/* Light mode */
+/* Light theme variables */
 :root {
   --bg-color: #fafafa;
   --text-color: #1a1a1a;
-  --accent-color: #305f72;
-  --link-color: #1e88e5;       /* blu leggibile */
-  --link-hover: #1565c0;       /* blu più intenso al passaggio */
+  --accent-color: #305f72;      /* blue-teal */
+  --secondary-color: #c5d5cb;   /* light gray-green */
   --border-color: #d0d0d0;
+  --link-color: #1e88e5;
+  --link-hover: #1565c0;
 }
 
-/* Dark mode */
+/* Dark theme variables */
 @media (prefers-color-scheme: dark) {
   :root {
     --bg-color: #101416;
     --text-color: #e8e8e8;
     --accent-color: #7cc2e6;
-    --link-color: #64b5f6;     /* blu chiaro su sfondo scuro */
-    --link-hover: #bbdefb;     /* quasi bianco in hover */
+    --secondary-color: #223034;
     --border-color: #333;
+    --link-color: #64b5f6;
+    --link-hover: #bbdefb;
   }
 }
 
-/* Dark mode support */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg-color: #101416;
-    --text-color: #e8e8e8;
-    --accent-color: #7cc2e6;
-    --border-color: #333;
-  }
-}
+/* -------------------------
+   Header (profile section)
+-------------------------- */
 
-/* Header with profile image */
 .profile-header {
   display: flex;
   align-items: center;
@@ -70,40 +68,106 @@ header h1 {
   border-radius: 999px;
 }
 
-/* Navigation */
-nav a {
-  margin-right: 12px;
-  text-decoration: none;
-  color: var(--accent-color);
-}
-nav a:hover {
-  text-decoration: underline;
+/* -------------------------
+   Navbar (sticky + blur)
+-------------------------- */
+
+nav {
+  position: sticky;
+  top: 0;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(8px);
+  padding: 0.6rem 0.4rem;
+  border-bottom: 1px solid var(--border-color);
+  z-index: 100;
 }
 
-/* Layout and cards */
+@media (prefers-color-scheme: dark) {
+  nav {
+    background: rgba(16, 20, 22, 0.85);
+  }
+}
+
+nav a {
+  margin-right: 16px;
+  text-decoration: none;
+  color: var(--text-color);
+  font-weight: 500;
+  transition: color 0.2s, border-bottom 0.2s;
+}
+
+nav a:hover,
+nav a.active {
+  color: var(--accent-color);
+  border-bottom: 2px solid var(--accent-color);
+  padding-bottom: 2px;
+}
+
+/* -------------------------
+   Section titles
+-------------------------- */
+
+.section-title {
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--accent-color);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 4px;
+}
+
+/* -------------------------
+   Cards and Grid
+-------------------------- */
+
 .grid {
   display: grid;
   gap: 16px;
 }
+
 .card {
   border: 1px solid var(--border-color);
   border-radius: 12px;
   padding: 16px;
-  background: rgba(255, 255, 255, 0.5);
+  background: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.4));
   backdrop-filter: blur(3px);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
 @media (prefers-color-scheme: dark) {
   .card {
-    background: rgba(0, 0, 0, 0.3);
+    background: linear-gradient(180deg, rgba(25,25,25,0.4), rgba(0,0,0,0.2));
   }
 }
 
-small, time {
-  color: var(--text-color);
-  opacity: 0.7;
+/* -------------------------
+   Hero Section (optional)
+-------------------------- */
+
+.hero {
+  text-align: center;
+  padding: 60px 20px;
+  background: linear-gradient(to bottom right, var(--accent-color), #1b3b4b);
+  color: white;
+  border-radius: 12px;
+  margin-bottom: 2rem;
 }
 
-/* General link colors */
+.hero h2 {
+  margin-bottom: 0.5rem;
+  font-size: 1.8rem;
+}
+
+/* -------------------------
+   Links and Misc
+-------------------------- */
+
 a {
   color: var(--link-color);
   text-decoration: none;
@@ -115,22 +179,19 @@ a:hover {
   text-decoration: underline;
 }
 
-
-/* Section title */
-.section-title {
-  margin-top: 1.5rem;
-  margin-bottom: 0.75rem;
-  font-size: 1.6rem;
-  font-weight: 600;
-  color: var(--accent-color);
-  border-bottom: 1px solid var(--border-color);
-  padding-bottom: 4px;
+small, time {
+  color: var(--text-color);
+  opacity: 0.7;
 }
 
-/* Active navigation link */
-nav a.active {
-  font-weight: 600;
-  border-bottom: 2px solid var(--accent-color);
-  padding-bottom: 2px;
-  color: var(--accent-color);
+/* -------------------------
+   Footer
+-------------------------- */
+
+footer {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color);
+  text-align: center;
+  font-size: 0.85rem;
 }
