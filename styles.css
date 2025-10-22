@@ -114,3 +114,23 @@ a:hover {
   color: var(--link-hover);
   text-decoration: underline;
 }
+
+
+/* Section title */
+.section-title {
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--accent-color);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 4px;
+}
+
+/* Active navigation link */
+nav a.active {
+  font-weight: 600;
+  border-bottom: 2px solid var(--accent-color);
+  padding-bottom: 2px;
+  color: var(--accent-color);
+}
