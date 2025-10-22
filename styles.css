@@ -10,12 +10,26 @@ body {
   transition: background-color 0.3s, color 0.3s;
 }
 
-/* Elegant theme variables */
+/* Light mode */
 :root {
   --bg-color: #fafafa;
   --text-color: #1a1a1a;
   --accent-color: #305f72;
+  --link-color: #1e88e5;       /* blu leggibile */
+  --link-hover: #1565c0;       /* blu più intenso al passaggio */
   --border-color: #d0d0d0;
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-color: #101416;
+    --text-color: #e8e8e8;
+    --accent-color: #7cc2e6;
+    --link-color: #64b5f6;     /* blu chiaro su sfondo scuro */
+    --link-hover: #bbdefb;     /* quasi bianco in hover */
+    --border-color: #333;
+  }
 }
 
 /* Dark mode support */
@@ -87,4 +101,16 @@ nav a:hover {
 small, time {
   color: var(--text-color);
   opacity: 0.7;
+}
+
+/* General link colors */
+a {
+  color: var(--link-color);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--link-hover);
+  text-decoration: underline;
 }
