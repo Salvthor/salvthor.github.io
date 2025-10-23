@@ -16,6 +16,24 @@ html{
   }
 }
 
+/* Redaction: solide, non selezionabile, non rivelabile con underline/hover */
+.redacted{
+  position: relative;
+  color: transparent !important;
+  user-select: none;
+  text-shadow: none;
+}
+.redacted::after{
+  content: "";
+  position: absolute;
+  inset: .15em 0 .15em 0;   /* bordi sopra/sotto per lasciare un po' di aria */
+  background: currentColor; /* usa il colore del testo corrente */
+  border-radius: 2px;
+}
+/* niente highlight quando si seleziona */
+.redacted::selection{ background: transparent; }
+
+
 body {
   font-family: system-ui, Segoe UI, Roboto, Arial, sans-serif;
   max-width: 980px;
