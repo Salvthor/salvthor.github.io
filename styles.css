@@ -2,24 +2,41 @@
    Base Layout and Theme
 -------------------------- */
 
+html{
+  /* pattern leggero + gradiente */
+  background:
+    radial-gradient(rgba(48,95,114,0.06) 1px, transparent 1px) 0 0/22px 22px,
+    linear-gradient(180deg, #f7f9fb 0%, #eef3f6 100%);
+}
+@media (prefers-color-scheme: dark){
+  html{
+    background:
+      radial-gradient(rgba(124,194,230,0.08) 1px, transparent 1px) 0 0/24px 24px,
+      linear-gradient(180deg, #0a0d0f 0%, #0c1113 100%);
+  }
+}
+
 body {
   font-family: system-ui, Segoe UI, Roboto, Arial, sans-serif;
-  max-width: 900px;
+  max-width: 980px;
   margin: 40px auto;
-  padding: 0 16px;
+  padding: 24px 20px 48px;
   line-height: 1.6;
   color: var(--text-color);
   background-color: var(--bg-color);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0,0,0,.06);
   transition: background-color 0.3s, color 0.3s;
 }
 
 /* Light theme variables */
 :root {
-  --bg-color: #fafafa;
-  --text-color: #1a1a1a;
+  --bg-color: #f5f7f9;          /* meno bianco */
+  --text-color: #121417;
   --accent-color: #305f72;      /* blue-teal */
   --secondary-color: #c5d5cb;   /* light gray-green */
-  --border-color: #d0d0d0;
+  --border-color: #d7dee4;      /* più soft */
   --link-color: #1e88e5;
   --link-hover: #1565c0;
 }
@@ -27,11 +44,11 @@ body {
 /* Dark theme variables */
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg-color: #101416;
+    --bg-color: #0e1315;
     --text-color: #e8e8e8;
     --accent-color: #7cc2e6;
     --secondary-color: #223034;
-    --border-color: #333;
+    --border-color: #2a3338;
     --link-color: #64b5f6;
     --link-hover: #bbdefb;
   }
@@ -59,6 +76,7 @@ body {
 header h1 {
   margin: 0;
   color: var(--accent-color);
+  letter-spacing: .2px;
 }
 
 .tag {
@@ -80,6 +98,7 @@ nav {
   padding: 0.6rem 0.4rem;
   border-bottom: 1px solid var(--border-color);
   z-index: 100;
+  margin-top: -8px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -97,7 +116,7 @@ nav a {
   transition: color 0.2s ease;
 }
 
-/* underline animato */
+/* underline animato singolo */
 nav a::after {
   content: "";
   position: absolute;
@@ -125,41 +144,50 @@ nav a.active {
 
 .section-title {
   margin-top: 1.5rem;
-  margin-bottom: 0.75rem;
-  font-size: 1.6rem;
-  font-weight: 600;
+  margin-bottom: 1rem;
+  font-size: 1.7rem;
+  font-weight: 700;
   color: var(--accent-color);
-  border-bottom: 1px solid var(--border-color);
-  padding-bottom: 4px;
+  border-bottom: 0;
+  border-left: 4px solid var(--accent-color);
+  padding: 6px 0 6px 10px;
+  border-radius: 8px;
+  background: rgba(48,95,114,0.06);
+}
+@media (prefers-color-scheme: dark){
+  .section-title{ background: rgba(124,194,230,0.08); }
 }
 
 /* -------------------------
    Cards and Grid
 -------------------------- */
 
-.grid {
-  display: grid;
-  gap: 16px;
-}
+.grid { display: grid; gap: 20px; }
 
 .card {
   border: 1px solid var(--border-color);
-  border-radius: 12px;
-  padding: 16px;
-  background: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.4));
+  border-radius: 14px;
+  padding: 18px;
+  background: #ffffffb3;              /* più pieno in light */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  transition: transform .15s ease, box-shadow .15s ease;
   backdrop-filter: blur(3px);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
-
 .card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.12);
+}
+@media (prefers-color-scheme: dark){
+  .card{
+    background: rgba(10,14,16,0.6);
+    box-shadow: 0 1px 6px rgba(0,0,0,0.35);
+  }
 }
 
-@media (prefers-color-scheme: dark) {
-  .card {
-    background: linear-gradient(180deg, rgba(25,25,25,0.4), rgba(0,0,0,0.2));
-  }
+/* griglie pronte per più densità */
+@media (min-width: 860px){
+  .grid.two { grid-template-columns: 1fr 1fr; }
+  .grid.three { grid-template-columns: 1fr 1fr 1fr; }
 }
 
 /* -------------------------
@@ -174,22 +202,19 @@ nav a.active {
   border-radius: 12px;
   margin-bottom: 2rem;
 }
-
-.hero h2 {
-  margin-bottom: 0.5rem;
-  font-size: 1.8rem;
-}
+.hero h2 { margin-bottom: 0.5rem; font-size: 1.8rem; }
 
 /* -------------------------
    Links and Misc
 -------------------------- */
 
+p { margin: .75rem 0; }
 a {
   color: var(--link-color);
   text-decoration: none;
+  text-underline-offset: 2px;
   transition: color 0.2s ease;
 }
-
 a:hover {
   color: var(--link-hover);
   text-decoration: underline;
@@ -199,6 +224,66 @@ small, time {
   color: var(--text-color);
   opacity: 0.7;
 }
+
+/* -------------------------
+   Callout / Pills / Timeline (opzionali)
+-------------------------- */
+
+.callout{
+  border:1px solid var(--border-color);
+  border-left:4px solid var(--accent-color);
+  border-radius:12px;
+  padding:14px 16px;
+  margin:18px 0;
+  background: rgba(0,0,0,0.02);
+}
+@media (prefers-color-scheme: dark){
+  .callout{ background: rgba(255,255,255,0.04); }
+}
+
+.pill-row{ display:flex; flex-wrap:wrap; gap:8px; margin-top:8px; }
+.pill{
+  font-size:.85rem; padding:4px 10px;
+  border:1px solid var(--border-color); border-radius:999px;
+  background:rgba(0,0,0,0.02);
+}
+@media (prefers-color-scheme: dark){
+  .pill{ background:rgba(255,255,255,0.04); }
+}
+
+.timeline { list-style:none; margin:0; padding:0; }
+.timeline li { position:relative; padding-left:24px; margin:10px 0; }
+.timeline li::before {
+  content:""; position:absolute; left:6px; top:0.55em;
+  width:8px; height:8px; border-radius:50%;
+  background: var(--accent-color);
+}
+.timeline time { font-weight:600; margin-right:6px; }
+
+/* Details */
+details { margin:8px 0; }
+details > summary { cursor:pointer; font-weight:600; list-style:none; }
+details > summary::-webkit-details-marker { display:none; }
+details[open] > summary { color: var(--accent-color); }
+
+/* -------------------------
+   Redaction (preprint)
+-------------------------- */
+
+.redacted{
+  position: relative;
+  color: transparent !important;
+  user-select: none;
+  text-shadow: none;
+}
+.redacted::after{
+  content: "";
+  position: absolute;
+  inset: .15em 0 .15em 0;
+  background: currentColor;
+  border-radius: 2px;
+}
+.redacted::selection{ background: transparent; }
 
 /* -------------------------
    Footer
