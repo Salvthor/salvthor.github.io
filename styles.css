@@ -248,9 +248,21 @@ nav a:hover, nav a.active { color:var(--accent-color); }
 }
 .redacted::selection { background:transparent; }
 
+.event-meta { font-size:.92rem; opacity:.85; margin:.2rem 0 .6rem; }
+.badge {
+  font-size:.75rem; padding:2px 8px; border-radius:999px;
+  border:1px solid var(--border-color); margin-left:6px;
+  background: rgba(230,240,255,0.55);
+}
+@media (prefers-color-scheme: dark){
+  .badge { background: rgba(255,255,255,0.06); }
+}
+
+
 /* ===== 11) FOOTER ===== */
 footer {
   margin-top:2rem; padding-top:1rem;
   border-top:1px solid var(--border-color);
   text-align:center; font-size:.85rem;
 }
+
