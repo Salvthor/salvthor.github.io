@@ -1,78 +1,139 @@
+/* ===== GLOBAL FONTS ===== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Merriweather:wght@400;700&display=swap');
+
+body {
+  font-family: "Inter", system-ui, Segoe UI, Roboto, sans-serif;
+  letter-spacing: 0.1px;
+}
+h1, h2, h3, h4 {
+  font-family: "Merriweather", Georgia, serif;
+  letter-spacing: 0.2px;
+}
+
 /* ===== A) Mesh decorativo dietro al body-card ===== */
 :root {
-  --blob1: radial-gradient(40% 50% at 10% 10%, rgba(48,95,114,.10), transparent 60%);
-  --blob2: radial-gradient(30% 40% at 90% 0%, rgba(124,194,230,.12), transparent 60%);
-  --blob3: radial-gradient(35% 45% at 100% 80%, rgba(48,95,114,.10), transparent 60%);
+  --blob1: radial-gradient(40% 50% at 15% 10%, rgba(70,130,180,.12), transparent 65%);
+  --blob2: radial-gradient(30% 40% at 85% 0%, rgba(160,190,180,.18), transparent 60%);
+  --blob3: radial-gradient(35% 45% at 90% 85%, rgba(200,150,80,.10), transparent 70%);
 }
 @media (prefers-color-scheme: dark){
   :root {
-    --blob1: radial-gradient(40% 50% at 10% 10%, rgba(124,194,230,.10), transparent 60%);
-    --blob2: radial-gradient(30% 40% at 90% 0%, rgba(124,194,230,.12), transparent 60%);
-    --blob3: radial-gradient(35% 45% at 100% 80%, rgba(124,194,230,.08), transparent 60%);
+    --blob1: radial-gradient(40% 50% at 10% 10%, rgba(124,194,230,.12), transparent 60%);
+    --blob2: radial-gradient(30% 40% at 90% 0%, rgba(90,160,180,.15), transparent 60%);
+    --blob3: radial-gradient(35% 45% at 100% 80%, rgba(80,180,180,.10), transparent 60%);
   }
 }
-/* strato sotto il body */
 html::before {
   content:"";
   position:fixed; inset:0;
-  background:
-    var(--blob1),
-    var(--blob2),
-    var(--blob3);
-  filter: blur(20px);
+  background: var(--blob1), var(--blob2), var(--blob3);
+  filter: blur(25px) saturate(110%);
   z-index:-2;
 }
-/* pattern + gradiente restano sull'html; questo è un layer in più */
 html{ z-index:0; position:relative; }
 
-/* ===== B) Divider di sezione eleganti ===== */
-.section-title + .section-sub {
-  margin: .25rem 0 1rem;
-  color: var(--text-color); opacity:.75;
+/* ===== B) Color Variables (light / dark tweak) ===== */
+:root {
+  --bg-color: #f7f6f3;
+  --text-color: #202325;
+  --accent-color: #2d5f6e;       /* teal */
+  --accent-alt: #e6b65b;         /* gold accent */
+  --border-color: #d3d3ce;
+  --link-color: #206ba4;
+  --link-hover: #12486b;
+}
+@media (prefers-color-scheme: dark){
+  :root {
+    --bg-color: #0d1113;
+    --text-color: #e8e8e8;
+    --accent-color: #7cc2e6;
+    --accent-alt: #e5c06b;
+    --border-color: #2d3336;
+    --link-color: #6ab6e9;
+    --link-hover: #a4daff;
+  }
+}
+
+/* ===== C) Section titles & subtitles ===== */
+.section-title {
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: var(--accent-color);
+  border-left: 4px solid var(--accent-alt);
+  padding: 6px 0 6px 10px;
+  border-radius: 6px;
+  background: rgba(255,255,255,0.45);
+}
+@media (prefers-color-scheme: dark){
+  .section-title{ background: rgba(255,255,255,0.06); }
 }
 .section-title::after{
   content:"";
   display:block;
-  height:3px; width:72px;
+  height:3px; width:70px;
   margin-top:8px;
-  background: linear-gradient(90deg, var(--accent-color), transparent);
+  background: linear-gradient(90deg, var(--accent-alt), transparent);
   border-radius: 2px;
 }
+.section-title + .section-sub {
+  margin: .25rem 0 1rem;
+  color: var(--text-color);
+  opacity:.75;
+  font-style:italic;
+}
 
-/* ===== C) Varianti card per gerarchia visiva ===== */
+/* ===== D) Cards ===== */
+.card {
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  padding: 22px;
+  background: rgba(255,255,255,0.88);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  backdrop-filter: blur(6px);
+  transition: transform .15s ease, box-shadow .15s ease;
+  margin-bottom: 28px;
+}
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 22px rgba(0,0,0,0.12);
+}
 .card.alt {
-  border-left: 4px solid var(--accent-color);
-  background: linear-gradient(180deg, rgba(48,95,114,.06), rgba(48,95,114,.03));
+  border-left: 4px solid var(--accent-alt);
+  background: linear-gradient(180deg, rgba(250,250,248,.75), rgba(240,240,236,.65));
 }
 @media (prefers-color-scheme: dark){
+  .card {
+    background: rgba(18,20,22,0.7);
+    box-shadow: 0 1px 8px rgba(0,0,0,0.45);
+  }
   .card.alt {
-    background: linear-gradient(180deg, rgba(124,194,230,.10), rgba(124,194,230,.05));
+    background: linear-gradient(180deg, rgba(20,26,30,0.8), rgba(14,18,20,0.6));
   }
 }
-.card.soft {
-  background: rgba(255,255,255,.85);
-}
-@media (prefers-color-scheme: dark){
-  .card.soft { background: rgba(14,19,21,.65); }
-}
 
-/* ===== D) Foto profilo più “ricca” (bordo gradiente soft) ===== */
-.profile-photo{
-  position:relative;
+/* ===== E) Decorative details ===== */
+.profile-photo {
+  border: 2px solid var(--accent-color);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
   background:
-    radial-gradient(60% 60% at 30% 30%, rgba(124,194,230,.20), transparent 60%);
-  border: 2px solid rgba(48,95,114,.35);
-  box-shadow: 0 8px 18px rgba(0,0,0,.10);
+    radial-gradient(60% 60% at 30% 30%, rgba(124,194,230,.25), transparent 70%);
 }
 @media (prefers-color-scheme: dark){
   .profile-photo{
-    border: 2px solid rgba(124,194,230,.35);
-    box-shadow: 0 8px 22px rgba(0,0,0,.45);
+    border: 2px solid var(--accent-color);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.55);
   }
 }
 
-/* ===== E) HR decorativo (se lo usi) ===== */
-hr{
+hr {
   border:0; height:1px; margin:14px 0 18px;
-  background: linear-gradient(90deg, transparent, var(--border-color), transparent);
+  background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
 }
+
+/* ===== F) Typography tweaks ===== */
+p { font-size: 1.02rem; line-height:1.7; margin:0.9rem 0; }
+a { color: var(--link-color); text-decoration:none; text-underline-offset:2px; transition:color .2s; }
+a:hover { color: var(--link-hover); text-decoration:underline; }
+small, time { color: var(--text-color); opacity:.7; }
