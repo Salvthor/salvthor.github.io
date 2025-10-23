@@ -180,34 +180,41 @@ nav a.active {
    Cards and Grid
 -------------------------- */
 
-.grid { display: grid; gap: 20px; }
+.grid {
+  display: grid;
+  gap: 28px;           /* più spazio tra elementi */
+  margin-top: 1rem;    /* separazione dal titolo */
+  margin-bottom: 1.5rem;
+}
 
 .card {
   border: 1px solid var(--border-color);
   border-radius: 14px;
-  padding: 18px;
-  background: #ffffffb3;              /* più pieno in light */
+  padding: 22px;       /* leggermente più aria interna */
+  background: #ffffffb3;
   box-shadow: 0 2px 8px rgba(0,0,0,0.06);
   transition: transform .15s ease, box-shadow .15s ease;
   backdrop-filter: blur(3px);
+  margin-bottom: 24px; /* spazio extra tra card singole */
 }
+
 .card:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 18px rgba(0,0,0,0.12);
 }
-@media (prefers-color-scheme: dark){
-  .card{
+
+@media (prefers-color-scheme: dark) {
+  .card {
     background: rgba(10,14,16,0.6);
     box-shadow: 0 1px 6px rgba(0,0,0,0.35);
   }
 }
 
 /* griglie pronte per più densità */
-@media (min-width: 860px){
+@media (min-width: 860px) {
   .grid.two { grid-template-columns: 1fr 1fr; }
   .grid.three { grid-template-columns: 1fr 1fr 1fr; }
 }
-
 /* -------------------------
    Hero Section (optional)
 -------------------------- */
