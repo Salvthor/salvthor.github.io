@@ -1,49 +1,50 @@
-/* ===== GLOBAL FONTS ===== */
+/* ===== 0) FONTS (deve stare prima di tutto) ===== */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Merriweather:wght@400;700&display=swap');
 
-body {
-  font-family: "Inter", system-ui, Segoe UI, Roboto, sans-serif;
-  letter-spacing: 0.1px;
-}
-h1, h2, h3, h4 {
-  font-family: "Merriweather", Georgia, serif;
-  letter-spacing: 0.2px;
-}
-
-/* ===== A) Mesh decorativo dietro al body-card ===== */
-:root {
+/* ===== 1) BACKGROUND (pattern + mesh) ===== */
+:root{
   --blob1: radial-gradient(40% 50% at 15% 10%, rgba(70,130,180,.12), transparent 65%);
   --blob2: radial-gradient(30% 40% at 85% 0%, rgba(160,190,180,.18), transparent 60%);
   --blob3: radial-gradient(35% 45% at 90% 85%, rgba(200,150,80,.10), transparent 70%);
 }
 @media (prefers-color-scheme: dark){
-  :root {
+  :root{
     --blob1: radial-gradient(40% 50% at 10% 10%, rgba(124,194,230,.12), transparent 60%);
     --blob2: radial-gradient(30% 40% at 90% 0%, rgba(90,160,180,.15), transparent 60%);
     --blob3: radial-gradient(35% 45% at 100% 80%, rgba(80,180,180,.10), transparent 60%);
   }
 }
-html::before {
-  content:"";
-  position:fixed; inset:0;
+html{
+  position:relative; z-index:0;
+  background:
+    radial-gradient(rgba(48,95,114,0.06) 1px, transparent 1px) 0 0/22px 22px,
+    linear-gradient(180deg, #f7f9fb 0%, #eef3f6 100%);
+}
+@media (prefers-color-scheme: dark){
+  html{
+    background:
+      radial-gradient(rgba(124,194,230,0.08) 1px, transparent 1px) 0 0/24px 24px,
+      linear-gradient(180deg, #0a0d0f 0%, #0c1113 100%);
+  }
+}
+html::before{
+  content:""; position:fixed; inset:0; z-index:-2;
   background: var(--blob1), var(--blob2), var(--blob3);
   filter: blur(25px) saturate(110%);
-  z-index:-2;
 }
-html{ z-index:0; position:relative; }
 
-/* ===== B) Color Variables (light / dark tweak) ===== */
+/* ===== 2) THEME VARS ===== */
 :root {
-  --bg-color: #f7f6f3;
+  --bg-color: #f7f6f3;       /* light: beige-grigio */
   --text-color: #202325;
-  --accent-color: #2d5f6e;       /* teal */
-  --accent-alt: #e6b65b;         /* gold accent */
+  --accent-color: #2d5f6e;   /* teal */
+  --accent-alt: #e6b65b;     /* gold */
   --border-color: #d3d3ce;
   --link-color: #206ba4;
   --link-hover: #12486b;
 }
 @media (prefers-color-scheme: dark){
-  :root {
+  :root{
     --bg-color: #0d1113;
     --text-color: #e8e8e8;
     --accent-color: #7cc2e6;
@@ -54,86 +55,140 @@ html{ z-index:0; position:relative; }
   }
 }
 
-/* ===== C) Section titles & subtitles ===== */
-.section-title {
-  margin-top: 1.5rem;
-  margin-bottom: 1rem;
-  font-size: 1.7rem;
-  font-weight: 700;
-  color: var(--accent-color);
-  border-left: 4px solid var(--accent-alt);
-  padding: 6px 0 6px 10px;
-  border-radius: 6px;
-  background: rgba(255,255,255,0.45);
+/* ===== 3) BASE LAYOUT ===== */
+body{
+  font-family: "Inter", system-ui, Segoe UI, Roboto, Arial, sans-serif;
+  letter-spacing:.1px;
+  max-width: 980px;
+  margin: 40px auto;
+  padding: 24px 20px 48px;
+  line-height: 1.6;
+  color: var(--text-color);
+  background-color: var(--bg-color);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0,0,0,.06);
+  transition: background-color .3s, color .3s;
+}
+h1,h2,h3,h4{ font-family:"Merriweather", Georgia, serif; letter-spacing:.2px; }
+p{ font-size:1.02rem; line-height:1.7; margin:.9rem 0; }
+a{ color:var(--link-color); text-decoration:none; text-underline-offset:2px; transition:color .2s; }
+a:hover{ color:var(--link-hover); text-decoration:underline; }
+small,time{ color:var(--text-color); opacity:.7; }
+hr{ border:0; height:1px; margin:14px 0 18px;
+    background:linear-gradient(90deg, transparent, var(--accent-color), transparent); }
+
+/* ===== 4) HEADER ===== */
+.profile-header{ display:flex; align-items:center; gap:20px; margin-bottom:1.5rem; }
+.profile-photo{
+  width:120px; height:120px; border-radius:50%; object-fit:cover;
+  border:2px solid var(--accent-color);
+  box-shadow:0 8px 20px rgba(0,0,0,.15);
+  background: radial-gradient(60% 60% at 30% 30%, rgba(124,194,230,.25), transparent 70%);
+}
+header h1{ margin:0; color:var(--accent-color); }
+
+/* pill/tag */
+.tag{ font-size:.85rem; padding:2px 8px; border:1px solid var(--border-color); border-radius:999px; }
+
+/* ===== 5) NAVBAR (sticky + underline animata) ===== */
+nav{
+  position:sticky; top:0; z-index:100; margin-top:-8px;
+  background:rgba(255,255,255,0.8); backdrop-filter:blur(8px);
+  padding:.6rem .4rem; border-bottom:1px solid var(--border-color);
 }
 @media (prefers-color-scheme: dark){
-  .section-title{ background: rgba(255,255,255,0.06); }
+  nav{ background:rgba(16,20,22,0.85); }
+}
+nav a{
+  position:relative; margin-right:16px; text-decoration:none;
+  color:var(--text-color); font-weight:500; transition:color .2s;
+}
+nav a::after{
+  content:""; position:absolute; left:0; bottom:-2px; width:0; height:2px;
+  background-color:var(--accent-color); transition:width .25s;
+}
+nav a:hover::after, nav a.active::after{ width:100%; }
+nav a:hover, nav a.active{ color:var(--accent-color); }
+
+/* ===== 6) SECTION TITLES ===== */
+.section-title{
+  margin-top:1.5rem; margin-bottom:1rem;
+  font-size:1.7rem; font-weight:700; color:var(--accent-color);
+  border-left:4px solid var(--accent-alt); padding:6px 0 6px 10px;
+  border-radius:6px; background:rgba(255,255,255,0.45);
+}
+@media (prefers-color-scheme: dark){
+  .section-title{ background:rgba(255,255,255,0.06); }
 }
 .section-title::after{
-  content:"";
-  display:block;
-  height:3px; width:70px;
-  margin-top:8px;
-  background: linear-gradient(90deg, var(--accent-alt), transparent);
-  border-radius: 2px;
+  content:""; display:block; height:3px; width:70px; margin-top:8px;
+  background:linear-gradient(90deg, var(--accent-alt), transparent); border-radius:2px;
 }
-.section-title + .section-sub {
-  margin: .25rem 0 1rem;
-  color: var(--text-color);
-  opacity:.75;
-  font-style:italic;
+.section-sub{ margin:.25rem 0 1rem; color:var(--text-color); opacity:.75; font-style:italic; }
+
+/* ===== 7) GRID & CARDS ===== */
+.grid{ display:grid; gap:28px; margin-top:1rem; margin-bottom:1.5rem; }
+@media (min-width:860px){
+  .grid.two{ grid-template-columns:1fr 1fr; }
+  .grid.three{ grid-template-columns:1fr 1fr 1fr; }
 }
 
-/* ===== D) Cards ===== */
-.card {
-  border: 1px solid var(--border-color);
-  border-radius: 14px;
-  padding: 22px;
-  background: rgba(255,255,255,0.88);
-  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
-  backdrop-filter: blur(6px);
-  transition: transform .15s ease, box-shadow .15s ease;
-  margin-bottom: 28px;
+.card{
+  border:1px solid var(--border-color);
+  border-radius:14px;
+  padding:22px;
+  background:rgba(255,255,255,0.88);
+  box-shadow:0 2px 12px rgba(0,0,0,0.07);
+  backdrop-filter:blur(6px);
+  transition:transform .15s, box-shadow .15s;
+  margin-bottom:28px;
 }
-.card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 22px rgba(0,0,0,0.12);
+.card:hover{ transform:translateY(-3px); box-shadow:0 10px 22px rgba(0,0,0,0.12); }
+.card.alt{
+  border-left:4px solid var(--accent-alt);
+  background:linear-gradient(180deg, rgba(250,250,248,.75), rgba(240,240,236,.65));
 }
-.card.alt {
-  border-left: 4px solid var(--accent-alt);
-  background: linear-gradient(180deg, rgba(250,250,248,.75), rgba(240,240,236,.65));
-}
+.card.soft{ background:rgba(255,255,255,.9); }
+
 @media (prefers-color-scheme: dark){
-  .card {
-    background: rgba(18,20,22,0.7);
-    box-shadow: 0 1px 8px rgba(0,0,0,0.45);
-  }
-  .card.alt {
-    background: linear-gradient(180deg, rgba(20,26,30,0.8), rgba(14,18,20,0.6));
-  }
+  .card{ background:rgba(18,20,22,0.7); box-shadow:0 1px 8px rgba(0,0,0,0.45); }
+  .card.alt{ background:linear-gradient(180deg, rgba(20,26,30,0.8), rgba(14,18,20,0.6)); }
+  .card.soft{ background:rgba(14,19,21,.65); }
 }
 
-/* ===== E) Decorative details ===== */
-.profile-photo {
-  border: 2px solid var(--accent-color);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-  background:
-    radial-gradient(60% 60% at 30% 30%, rgba(124,194,230,.25), transparent 70%);
+/* ===== 8) HERO (opzionale) ===== */
+.hero{
+  text-align:center; padding:60px 20px;
+  background:linear-gradient(to bottom right, var(--accent-color), #1b3b4b);
+  color:#fff; border-radius:12px; margin-bottom:2rem;
 }
-@media (prefers-color-scheme: dark){
-  .profile-photo{
-    border: 2px solid var(--accent-color);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.55);
-  }
-}
+.hero h2{ margin-bottom:.5rem; font-size:1.8rem; }
 
-hr {
-  border:0; height:1px; margin:14px 0 18px;
-  background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+/* ===== 9) CALLOUT / PILLS / TIMELINE ===== */
+.callout{
+  border:1px solid var(--border-color); border-left:4px solid var(--accent-color);
+  border-radius:12px; padding:14px 16px; margin:18px 0;
+  background:rgba(0,0,0,0.02);
 }
+@media (prefers-color-scheme: dark){ .callout{ background:rgba(255,255,255,0.04); } }
 
-/* ===== F) Typography tweaks ===== */
-p { font-size: 1.02rem; line-height:1.7; margin:0.9rem 0; }
-a { color: var(--link-color); text-decoration:none; text-underline-offset:2px; transition:color .2s; }
-a:hover { color: var(--link-hover); text-decoration:underline; }
-small, time { color: var(--text-color); opacity:.7; }
+.pill-row{ display:flex; flex-wrap:wrap; gap:8px; margin-top:8px; }
+.pill{ font-size:.85rem; padding:4px 10px; border:1px solid var(--border-color); border-radius:999px; background:rgba(0,0,0,0.02); }
+@media (prefers-color-scheme: dark){ .pill{ background:rgba(255,255,255,0.04); } }
+
+.timeline{ list-style:none; margin:0; padding:0; }
+.timeline li{ position:relative; padding-left:24px; margin:10px 0; }
+.timeline li::before{
+  content:""; position:absolute; left:6px; top:.55em; width:8px; height:8px; border-radius:50%;
+  background:var(--accent-color);
+}
+.timeline time{ font-weight:600; margin-right:6px; }
+
+/* ===== 10) REDACTION (preprints) ===== */
+.redacted{ position:relative; color:transparent!important; user-select:none; text-shadow:none; }
+.redacted::after{ content:""; position:absolute; inset:.15em 0 .15em 0; background:currentColor; border-radius:2px; }
+.redacted::selection{ background:transparent; }
+
+/* ===== 11) FOOTER ===== */
+footer{ margin-top:2rem; padding-top:1rem; border-top:1px solid var(--border-color); text-align:center; font-size:.85rem; }
