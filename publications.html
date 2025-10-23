@@ -5,7 +5,10 @@
   <title>Publications | Salvatore Romano</title>
   <link rel="stylesheet" href="styles.css">
   <style>
-    .muted { opacity: .75 }
+    .muted { opacity:.75 }
+    .meta { font-size:.92rem; opacity:.85; }
+    .link-row { display:flex; flex-wrap:wrap; gap:10px; margin-top:8px; }
+    .link-row a { text-decoration:none; }
   </style>
 </head>
 <body>
@@ -32,50 +35,74 @@
 <main>
   <h2 class="section-title">Publications</h2>
 
-  <p>Selected peer-reviewed works. Full list available on 
-    <a href="https://scholar.google.com/citations?user=wXxv-s0AAAAJ&hl=it">Google Scholar</a>.
-  </p>
+  <section class="card">
+    <p>Selected peer-reviewed works. Full list on
+      <a href="https://scholar.google.com/citations?user=wXxv-s0AAAAJ&hl=it">Google Scholar</a>.
+    </p>
+  </section>
 
-  <h3>2025</h3>
-  <ul>
-    <li>
-      Marco Aruta, Vincenzo Pio Palma, Aniello Murano, Vadim Malvone, <strong>Salvatore Romano</strong>.
-      “<em>FindMe: A Prototype Videogame AI based on CTL with an Optimized Synthesis Algorithm</em>.”
-      <em>Proceedings of the 24th International Conference on Autonomous Agents and Multiagent Systems (AAMAS 2025)</em>,
-      pp. 2997–2999, 2025. 
-      <a href="#">PDF</a> · <a href="#">BibTeX</a> · <a href="#">DOI</a>
-    </li>
-    <li>
-      Marco Aruta, Aniello Murano, <strong>Salvatore Romano</strong>.  
-      “<em>ATL for Dynamic Gaming Environments</em>.” In  
-      <em>Multi-Agent Systems: 21st European Conference EUMAS 2024, Dublin, Ireland, August 26–28, 2024, Proceedings</em>,  
-      LNCS 15685, p. 129, Springer Nature, 2025. 
-      <a href="https://books.google.it/books?hl=it&lr=&id=Jw1nEQAAQBAJ&pg=PA129">Link</a>
-    </li>
-  </ul>
+  <h3 class="section-title">2025</h3>
+  <section class="grid two">
+    <!-- AAMAS 2025 -->
+    <article class="card">
+      <h4>FindMe: A Prototype Videogame AI based on CTL with an Optimized Synthesis Algorithm</h4>
+      <p class="meta">
+        Marco Aruta, Vincenzo Pio Palma, Aniello Murano, Vadim Malvone, <strong>Salvatore Romano</strong><br>
+        <em>Proceedings of the 24th International Conference on Autonomous Agents and Multiagent Systems (AAMAS 2025)</em>, pp. 2997–2999
+      </p>
+      <div class="link-row">
+        <a href="#">PDF</a>
+        <a href="#">BibTeX</a>
+        <a href="#">DOI</a>
+      </div>
+    </article>
 
-  <h3>Preprints / Under Review</h3>
-<ul>
-  <li>
-    <span class="muted">Under review — ICAART 2026 (International Conference on Agents and Artificial Intelligence)</span> —
-    <span class="redacted" aria-label="Temporarily redacted title">
-      FindMe Reforged: Temporal Logic AI for Richer Videogame Scenarios
-    </span>.
-    <span class="redacted" aria-label="Temporarily redacted authors">
-      Vadim Malvone, Aniello Murano, Vincenzo Pio Palma, Salvatore Romano
-    </span>.
-  </li>
-  <li>
-    <span class="muted">Under review — HEALTHINF 2026 (International Conference on Health Informatics)</span> —
-    <span class="redacted" aria-label="Temporarily redacted title">
-      An Innovative Infrastructure for a Pediatric Oncology Network in the Campania Region
-    </span>.
-    <span class="redacted" aria-label="Temporarily redacted authors">
-      Erica Ambrosino, Marco Aruta, Dalia As Ad, Sara Ferrigno, Ciro Listone, Aniello Murano, Salvatore Romano, Melania Ruopolo
-    </span>.
-  </li>
-</ul>
+    <!-- EUMAS LNCS 2025 -->
+    <article class="card">
+      <h4>ATL for Dynamic Gaming Environments</h4>
+      <p class="meta">
+        Marco Aruta, Aniello Murano, <strong>Salvatore Romano</strong><br>
+        In <em>Multi-Agent Systems: 21st European Conference, EUMAS 2024, Dublin, Ireland, August 26–28, 2024, Proceedings</em>,
+        LNCS 15685, p. 129, Springer Nature, 2025
+      </p>
+      <div class="link-row">
+        <a href="https://books.google.it/books?hl=it&lr=&id=Jw1nEQAAQBAJ&pg=PA129">Link</a>
+      </div>
+    </article>
+  </section>
 
+  <h3 class="section-title">Preprints / Under Review</h3>
+  <section class="grid two">
+    <!-- ICAART 2026 -->
+    <article class="card">
+      <p class="muted">Under review — ICAART 2026 (International Conference on Agents and Artificial Intelligence)</p>
+      <h4>
+        <span class="redacted" aria-label="Temporarily redacted title">
+          FindMe Reforged: Temporal Logic AI for Richer Videogame Scenarios
+        </span>
+      </h4>
+      <p class="meta">
+        <span class="redacted" aria-label="Temporarily redacted authors">
+          Vadim Malvone, Aniello Murano, Vincenzo Pio Palma, Salvatore Romano
+        </span>
+      </p>
+    </article>
+
+    <!-- HEALTHINF 2026 -->
+    <article class="card">
+      <p class="muted">Under review — HEALTHINF 2026 (International Conference on Health Informatics)</p>
+      <h4>
+        <span class="redacted" aria-label="Temporarily redacted title">
+          An Innovative Infrastructure for a Pediatric Oncology Network in the Campania Region
+        </span>
+      </h4>
+      <p class="meta">
+        <span class="redacted" aria-label="Temporarily redacted authors">
+          Erica Ambrosino, Marco Aruta, Dalia As Ad, Sara Ferrigno, Ciro Listone, Aniello Murano, Salvatore Romano, Melania Ruopolo
+        </span>
+      </p>
+    </article>
+  </section>
 </main>
 
 <footer><small>© Salvatore Romano — University of Naples Federico II</small></footer>
