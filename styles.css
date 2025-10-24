@@ -112,3 +112,25 @@
 @media (prefers-reduced-motion: reduce){
   *{ transition: none !important; }
 }
+
+
+/* ===== Desktop navbar reset (>= 721px) ===== */
+@media (min-width: 721px){
+  /* nascondi hamburger e checkbox */
+  #nav-toggle, .hamburger { display: none !important; }
+
+  /* nav inline classico */
+  .nav-links{
+    display: flex !important;
+    gap: 16px;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    box-shadow: none;
+    background: transparent;
+  }
+  .nav-links a{
+    margin: 0 16px 0 0;
+    padding: 0;                  /* evita tap-padding desktop */
+  }
+}
