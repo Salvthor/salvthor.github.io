@@ -253,6 +253,24 @@ nav a:hover,nav a.active{color:var(--accent-color);}
   .card, .card p, .card h3, .card h4, .card li { color: var(--text-color); }
 }
 
+/* Fix dark-mode su mobile: ripristina card scure */
+@media (prefers-color-scheme: dark) and (max-width: 720px){
+  .card{
+    background: #151a22;              /* pieno e leggibile */
+    box-shadow: 0 6px 16px rgba(0,0,0,.55);
+    backdrop-filter: none;
+  }
+  .card.soft{ background: #12171e; }
+  .card.alt{
+    background: linear-gradient(180deg, rgba(127,179,255,.10), rgba(240,194,75,.06));
+    border-left: 6px solid var(--accent-alt);
+  }
+
+  /* testo e link dentro le card */
+  .card h3, .card h4, .card p, .card li, .card small{ color: var(--text-color); }
+  .card a{ color: var(--link-color); }
+}
+
 
 /* ===== FOOTER ===== */
 footer{margin-top:2rem;padding-top:1rem;border-top:1px solid var(--border-color);text-align:center;font-size:.85rem;}
