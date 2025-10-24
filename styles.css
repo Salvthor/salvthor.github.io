@@ -203,5 +203,56 @@ nav a:hover,nav a.active{color:var(--accent-color);}
   .badge{font-size:.72rem;padding:2px 7px;}
 }
 
+/* NAV mobile: bugfix ordine/z-index/width */
+@media (max-width: 720px){
+  .nav-toggle{ display:flex; position: sticky; top: 8px; z-index: 120; }
+  nav{
+    width: 100%;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .25s ease;
+    border: 1px solid transparent;
+    border-radius: 12px;
+    margin-bottom: 8px;          /* evita sovrapposizione con hr */
+  }
+  .navcheck:checked ~ nav{
+    max-height: 360px;
+    background: rgba(255,255,255,.90);
+    border-color: var(--border-color);
+  }
+  @media (prefers-color-scheme: dark){
+    .navcheck:checked ~ nav{ background: rgba(16,20,22,.95); }
+  }
+  nav a{
+    display: block;
+    padding: 12px 6px;
+    margin: 0;
+    font-size: 1rem;
+  }
+  nav a::after{ bottom: -3px; height: 3px; }
+
+  /* Previene “salti” di layout */
+  body{ overflow-x: hidden; }
+}
+
+/* Foto profilo: inquadratura e dimensioni più sicure */
+.profile-photo{
+  width: 100px; height: 100px;
+  object-fit: cover;
+  object-position: 50% 22%;
+}
+@media (max-width: 720px){
+  .profile-photo{ width: 82px; height: 82px; object-position: 50% 18%; }
+}
+
+/* Nascondi blocchi vuoti che creano bande */
+.card:empty, .updates:empty, .section-sub:empty { display: none; }
+
+/* Contrasto in dark mode dentro le card */
+@media (prefers-color-scheme: dark){
+  .card, .card p, .card h3, .card h4, .card li { color: var(--text-color); }
+}
+
+
 /* ===== FOOTER ===== */
 footer{margin-top:2rem;padding-top:1rem;border-top:1px solid var(--border-color);text-align:center;font-size:.85rem;}
