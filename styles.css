@@ -271,6 +271,56 @@ nav a:hover,nav a.active{color:var(--accent-color);}
   .card a{ color: var(--link-color); }
 }
 
+/* ==== Burger minimal, floating, elegante ==== */
+@media (max-width: 720px){
+  .nav-toggle{
+    position: fixed;            /* sempre visibile */
+    top: 12px; right: 14px;
+    width: 42px; height: 42px;
+    border-radius: 12px;
+    background: rgba(20,24,30,.75);
+    border: 1px solid rgba(255,255,255,.09);
+    box-shadow: 0 6px 18px rgba(0,0,0,.35);
+    backdrop-filter: blur(6px);
+    gap: 6px;                   /* distanza tra le barre */
+  }
+  .nav-toggle:hover{ box-shadow: 0 8px 22px rgba(0,0,0,.45); }
+
+  .nav-toggle span{
+    width: 20px; height: 2px; border-radius: 2px;
+    background: var(--accent-color);
+    transition: transform .22s ease, opacity .18s ease, background .2s;
+  }
+
+  /* icona in X */
+  .navcheck:checked + .nav-toggle span:nth-child(1){ transform: translateY(8px) rotate(45deg); }
+  .navcheck:checked + .nav-toggle span:nth-child(2){ opacity: 0; }
+  .navcheck:checked + .nav-toggle span:nth-child(3){ transform: translateY(-8px) rotate(-45deg); }
+
+  /* menu a tendina più curato */
+  nav{
+    margin-top: 64px;              /* spazio sotto al burger */
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    box-shadow: 0 10px 28px rgba(0,0,0,.35);
+  }
+  .navcheck:checked ~ nav{ max-height: 420px; }
+  nav a{
+    padding: 14px 12px;
+    border-bottom: 1px solid rgba(255,255,255,.06);
+  }
+  nav a:last-child{ border-bottom: 0; }
+}
+
+/* variante chiara del pulsante */
+@media (max-width: 720px) and (prefers-color-scheme: light){
+  .nav-toggle{
+    background: rgba(255,255,255,.9);
+    border: 1px solid rgba(0,0,0,.06);
+    box-shadow: 0 8px 20px rgba(31,61,143,.18);
+  }
+  nav{ box-shadow: 0 10px 28px rgba(31,61,143,.18); }
+}
 
 /* ===== FOOTER ===== */
 footer{margin-top:2rem;padding-top:1rem;border-top:1px solid var(--border-color);text-align:center;font-size:.85rem;}
