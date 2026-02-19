@@ -223,30 +223,39 @@ nav a:hover,nav a.active{color:var(--accent-color);}
 .card { position: relative; } /* Necessario per l'overlay */
 
 .bibtex-output {
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
-    right: 10px;
-    z-index: 10;
-    background: var(--bg-color);
-    border: 1px solid var(--accent-color);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    display: none;
+    position: relative;
+    background: rgba(0, 0, 0, 0.3); /* Sfondo semi-trasparente scuro */
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 35px 10px 10px 10px; /* Spazio extra in alto per il tasto Copy */
+    margin: 10px 0;
+    font-family: 'monospace', monospace;
+    font-size: 0.75rem;
+    line-height: 1.3;
+    max-height: 180px; /* Altezza massima per non deformare la card */
+    overflow-y: auto;  /* Scroll se il testo è lungo */
+    white-space: pre-wrap;
+    word-break: break-all;
 }
+
+/* Scrollbar stilizzata per non essere brutta */
+.bibtex-output::-webkit-scrollbar { width: 5px; }
+.bibtex-output::-webkit-scrollbar-thumb { background: var(--accent-color); border-radius: 10px; }
 
 .copy-btn {
     position: absolute;
     top: 8px;
     right: 8px;
-    padding: 4px 8px;
-    font-size: 0.7rem;
+    z-index: 2;
+    padding: 3px 8px;
+    font-size: 0.65rem;
     background: var(--accent-color);
-    color: white;
-    border: none;
     border-radius: 4px;
+    border: none;
+    color: #fff;
     cursor: pointer;
-    opacity: 0.8;
-    transition: opacity 0.2s;
-    font-family: sans-serif;
 }
 
 .copy-btn:hover {
