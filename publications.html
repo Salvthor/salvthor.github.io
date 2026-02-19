@@ -159,12 +159,29 @@
   <script>
 function generateBib(btn) {
     const card = btn.closest('.card');
+    let box = card.querySelector('.bibtex-output');
+
+    // Se il box esiste già ed è visibile, lo chiudiamo (Toggle)
+    if (box && box.style.display === 'block') {
+        box.style.display = 'none';
+        return;
+    }
+
+    // Se non esiste, lo creiamo
+    if (!box) {
+        box = document.createElement('pre');
+        box.className = 'bibtex-output';
+        // Lo inseriamo PRIMA dei link-row per non coprirli
+        const linkRow = card.querySelector('.link-row');
+        card.insertBefore(box, linkRow);
+    }
+
+    // Estrazione dati
     const title = card.querySelector('.pub-title').innerText.trim();
     const authors = card.querySelector('.pub-authors').innerText.trim();
     const venue = card.querySelector('.pub-venue').innerText.trim();
     const year = card.querySelector('.pub-year') ? card.querySelector('.pub-year').innerText.trim() : "2025";
     
-    // CiteKey basata sul primo autore (standard accademico)
     const authorArray = authors.split(',');
     const lastName = authorArray[0].trim().split(' ').pop().toLowerCase();
     const citeKey = lastName + year;
@@ -176,21 +193,8 @@ function generateBib(btn) {
   year   = {${year}}
 }`;
 
-    let box = card.querySelector('.bibtex-output');
-    if (!box) {
-        box = document.createElement('pre');
-        box.className = 'bibtex-output';
-        card.appendChild(box);
-    }
-
-    if (box.style.display === 'block' && box.getAttribute('data-current') === citeKey) {
-        box.style.display = 'none';
-    } else {
-        // Inseriamo il testo e il tasto copia
-        box.innerHTML = `<button class="copy-btn" onclick="copyToClipboard(this)">Copy</button><code>${bibtex}</code>`;
-        box.setAttribute('data-current', citeKey);
-        box.style.display = 'block';
-    }
+    box.innerHTML = `<button class="copy-btn" onclick="copyToClipboard(this)">Copy</button><code>${bibtex}</code>`;
+    box.style.display = 'block';
 }
 
 // Funzione per copiare effettivamente il testo
