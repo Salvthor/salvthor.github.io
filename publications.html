@@ -164,16 +164,14 @@
   <script>
 function generateBib(btn) {
     const card = btn.closest('.card');
-
-    // Estrazione dati (assicurati di aver messo le classi nell'HTML!)
     const title = card.querySelector('.pub-title').innerText.trim();
     const authors = card.querySelector('.pub-authors').innerText.trim();
     const venue = card.querySelector('.pub-venue').innerText.trim();
     const year = card.querySelector('.pub-year') ? card.querySelector('.pub-year').innerText.trim() : "2025";
     
-    // Genera CiteKey (es: romano2025)
+    // CiteKey basata sul primo autore (standard accademico)
     const authorArray = authors.split(',');
-    const lastName = authorArray[authorArray.length - 1].trim().split(' ').pop().toLowerCase();
+    const lastName = authorArray[0].trim().split(' ').pop().toLowerCase();
     const citeKey = lastName + year;
 
     const bibtex = `@inproceedings{${citeKey},
@@ -183,7 +181,6 @@ function generateBib(btn) {
   year   = {${year}}
 }`;
 
-    // Trova o crea il box
     let box = card.querySelector('.bibtex-output');
     if (!box) {
         box = document.createElement('pre');
@@ -191,13 +188,29 @@ function generateBib(btn) {
         card.appendChild(box);
     }
 
-    // Toggle: se è già quello giusto e visibile, lo chiude. Altrimenti lo aggiorna e mostra.
-    if (box.style.display === 'block' && box.innerText === bibtex) {
+    if (box.style.display === 'block' && box.getAttribute('data-current') === citeKey) {
         box.style.display = 'none';
     } else {
-        box.innerText = bibtex;
+        // Inseriamo il testo e il tasto copia
+        box.innerHTML = `<button class="copy-btn" onclick="copyToClipboard(this)">Copy</button><code>${bibtex}</code>`;
+        box.setAttribute('data-current', citeKey);
         box.style.display = 'block';
     }
+}
+
+// Funzione per copiare effettivamente il testo
+function copyToClipboard(button) {
+    const text = button.nextSibling.innerText; // Prende il testo dentro <code>
+    navigator.clipboard.writeText(text).then(() => {
+        const originalText = button.innerText;
+        button.innerText = "Copied!";
+        button.style.background = "#28a745"; // Verde successo
+        
+        setTimeout(() => {
+            button.innerText = originalText;
+            button.style.background = ""; // Torna al colore originale
+        }, 2000);
+    });
 }
 </script>
 </body>
