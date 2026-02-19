@@ -163,40 +163,41 @@
 
   <script>
 function generateBib(btn) {
-  // Trova la card che contiene il bottone
-  const card = btn.closest('.card');
+    const card = btn.closest('.card');
 
-  // Recupera i testi dalle classi
-  const title = card.querySelector('.pub-title').innerText.trim();
-  const authors = card.querySelector('.pub-authors').innerText.trim();
-  const venue = card.querySelector('.pub-venue').innerText.trim();
-  const year = card.querySelector('.pub-year') ? card.querySelector('.pub-year').innerText.trim() : "2025";
-  const pages = card.querySelector('.pub-pages') ? card.querySelector('.pub-pages').innerText.trim().replace('pp. ', '') : "";
+    // Estrazione dati (assicurati di aver messo le classi nell'HTML!)
+    const title = card.querySelector('.pub-title').innerText.trim();
+    const authors = card.querySelector('.pub-authors').innerText.trim();
+    const venue = card.querySelector('.pub-venue').innerText.trim();
+    const year = card.querySelector('.pub-year') ? card.querySelector('.pub-year').innerText.trim() : "2025";
+    
+    // Genera CiteKey (es: romano2025)
+    const authorArray = authors.split(',');
+    const lastName = authorArray[authorArray.length - 1].trim().split(' ').pop().toLowerCase();
+    const citeKey = lastName + year;
 
-  // Genera una chiave BibTeX automatica (CognomePrimoAutore + Anno)
-  const firstAuthor = authors.split(',')[0].split(' ').pop().toLowerCase();
-  const citeKey = firstAuthor + year;
-
-  // Costruisce il template
-  const bibtex = `@inproceedings{${citeKey},
-  title = {${title}},
+    const bibtex = `@inproceedings{${citeKey},
+  title  = {${title}},
   author = {${authors.replace(/,/g, ' and')}},
   booktitle = {${venue}},
-  year = {${year}}${pages ? `,\n  pages = {${pages}}` : ""}
+  year   = {${year}}
 }`;
 
-  // Mostra/Nasconde il box
-  let box = card.querySelector('.bibtex-output');
-  if (!box) {
-    box = document.createElement('pre');
-    box.className = 'bibtex-output';
-    // Stile veloce per il box
-    box.style = "background:#f4f4f4; padding:10px; margin-top:10px; font-size:0.8rem; border-left:3px solid #007bff; white-space:pre-wrap;";
-    card.appendChild(box);
-  }
+    // Trova o crea il box
+    let box = card.querySelector('.bibtex-output');
+    if (!box) {
+        box = document.createElement('pre');
+        box.className = 'bibtex-output';
+        card.appendChild(box);
+    }
 
-  box.innerText = bibtex;
-  box.style.display = (box.style.display === 'block') ? 'none' : 'block';
+    // Toggle: se è già quello giusto e visibile, lo chiude. Altrimenti lo aggiorna e mostra.
+    if (box.style.display === 'block' && box.innerText === bibtex) {
+        box.style.display = 'none';
+    } else {
+        box.innerText = bibtex;
+        box.style.display = 'block';
+    }
 }
 </script>
 </body>
