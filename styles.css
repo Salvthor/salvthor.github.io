@@ -220,25 +220,17 @@ nav a:hover,nav a.active{color:var(--accent-color);}
 @media(prefers-color-scheme:dark){.badge{background:rgba(255,255,255,0.06);}}
 
 /* Dynamic BibTeX box */
+.card { position: relative; } /* Necessario per l'overlay */
+
 .bibtex-output {
-  display: none;
-  margin-top: 15px;
-  padding: 15px;
-  
-  background: var(--bg-color);
-  color: var(--text-color);
-  border: 1px solid var(--border-color);
-  border-left: 4px solid var(--accent-alt); 
-  border-radius: 8px;
-  
-  font-family: 'Courier New', Courier, monospace;
-  font-size: 0.85rem;
-  line-height: 1.4;
-  
-  white-space: pre-wrap;
-  word-wrap: break-word;
-  text-align: left;
-  overflow-x: auto;
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+    z-index: 10;
+    background: var(--bg-color);
+    border: 1px solid var(--accent-color);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
 }
 
 /* ========= Mobile layout tweaks ========= */
